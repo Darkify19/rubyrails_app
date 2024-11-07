@@ -1,7 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-// General Body Styles
+/*
+ .
+ .
+ .
+ *= require_tree .
+ *= require_self
+ */
 body {
   padding-top: 60px; /* Adjust padding for top spacing */
 }
