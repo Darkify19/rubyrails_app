@@ -10,11 +10,17 @@
 
   </head>
 
-<body> <a href="/..">go to index?</a>
+<body> 
+
+
+<a href="/..">go to index?</a>
   <a href="/static_pages/help">go to help</a>
   <a href="/static_pages/about">go to about</a>
 <%= render 'layouts/header' %>
 <div class="container">
+<% flash.each do |message_type, message| %>
+  <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
 <%= yield %>
 <%= render 'layouts/footer' %>
 <%= debug(params) if Rails.env.development? %>
