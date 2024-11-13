@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "static_pages/about"
   get "render/index"
   get '/signup', to: 'users#new'
-  
+  get '/login', to: 'sessions#new'
   resources :users
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
