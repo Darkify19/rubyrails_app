@@ -8,3 +8,155 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+ @import 'application.scss';
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+ 
+/* Universal */
+body {
+   padding-top: 60px;
+}
+
+section {
+   overflow: auto;
+}
+
+textarea {
+   resize: vertical;
+}
+
+.center {
+   text-align: center;
+}
+
+.center h1 {
+   margin-bottom: 10px;
+}
+
+#logo {
+   float: left;
+   margin-right: 10px;
+   font-size: 1.7em;
+   color: #fff;
+   text-transform: uppercase;
+   letter-spacing: -1px;
+   padding-top: 9px;
+   font-weight: bold;
+}
+
+#logo:hover {
+   color: #fff;
+   text-decoration: none;
+}
+
+/* Footer */
+footer {
+   margin-top: 45px;
+   padding-top: 5px;
+   border-top: 1px solid #eaeaea;
+   color: #777;
+}
+
+footer a {
+   color: #555;
+}
+
+footer a:hover {
+   color: #222;
+}
+
+footer small {
+   float: left;
+}
+
+footer ul {
+   float: right;
+   list-style: none;
+}
+
+footer ul li {
+   float: left;
+   margin-left: 15px;
+}
+
+/* Debug dump */
+.debug_dump {
+   clear: both;
+   float: left;
+   width: 100%;
+   margin-top: 45px;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+/* Gray color utility */
+.gray-medium-light {
+   color: #eaeaea;
+}
+
+/* Sidebar */
+aside {
+   margin-top: 20px;
+}
+
+aside section {
+   padding: 10px 0;
+   margin-top: 20px;
+}
+
+aside section:first-child {
+   border: 0;
+   padding-top: 0;
+}
+
+aside section span {
+   display: block;
+   margin-bottom: 3px;
+   line-height: 1;
+}
+
+aside section h1 {
+   font-size: 1.4em;
+   text-align: left;
+   letter-spacing: -1px;
+   margin-bottom: 3px;
+   margin-top: 0;
+}
+
+.gravatar {
+   float: left;
+   margin-right: 10px;
+}
+
+.gravatar_edit {
+   margin-top: 15px;
+}
+
+/* Input styles */
+input, textarea, select, .uneditable-input {
+   border: 1px solid #bbb;
+   width: 100%;
+   margin-bottom: 15px;
+   -moz-box-sizing: border-box;
+   -webkit-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+input {
+   height: auto !important;
+}
+#error_explanation {
+color: red;
+ul {
+color: red;
+margin: 0 0 30px 0;
+}
+}
+.field_with_errors {
+@extend .has-error;
+.form-control {
+color: $state-danger-text;
+}
+}

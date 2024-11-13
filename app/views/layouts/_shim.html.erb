@@ -1,0 +1,8 @@
+<!-- app/views/layouts/_shim.html.erb -->
+<%= tag.meta(name: 'viewport', content: 'width=device-width, initial-scale=1.0') %>
+<%= tag.meta(name: 'description', content: 'A description of your website.') %>
+<%= tag.meta(name: 'author', content: 'Your Name or Company') %>
+<%= tag.meta(name: 'theme-color', content: '#ffffff') %>  <!-- Optional: Sets theme color for mobile browsers -->
+
+<!-- Bootstrap 5 Link to the CSS file (optional if not already in your application layout) -->
+<%= stylesheet_link_tag 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css', integrity: 'sha384-KyZXEJ4LJQlmqgNhc87Af88esBcvM57uX4vD/nJ2cb3NbnK+XrJYZ6Gn3tvBpS0x', crossorigin: 'anonymous' %>
