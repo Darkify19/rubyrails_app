@@ -4,6 +4,7 @@ source "https://rubygems.org"
 
 gem "rails", "~> 8.0.0"
 gem 'bcrypt', '3.1.13'
+gem 'webpacker', '~> 5.0' # You can adjust the version based on your Rails version
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"

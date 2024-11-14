@@ -1,26 +1,43 @@
 <header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
     <!-- Logo link -->
-    <%= link_to "Sample App", "#", id: "logo", class: "navbar-brand" %>
+    <%= link_to "Sample App", root_path, id: "logo", class: "navbar-brand" %>
 
     <!-- Toggle button for mobile view -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
+
     <!-- Navbar links and menu items -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <nav class="ms-auto"> <!-- ms-auto for aligning links to the right -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <%= link_to "Home", "..", class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Help", "#", class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <%= link_to "Log in", "#", class: "nav-link" %>
-          </li>
+     
+          <% if logged_in? %>
+            <li class="nav-item">
+              <%= link_to "Users", '#', class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Profile", current_user, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Settings", '#', class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+<%= link_to "Log out", logout_path, method: :delete, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Log in", login_path, class: "nav-link" %>
+            </li>
+          <% end %>
         </ul>
       </nav>
     </div>
