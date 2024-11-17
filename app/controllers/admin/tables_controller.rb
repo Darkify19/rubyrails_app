@@ -3,6 +3,8 @@ class Admin::TablesController < ApplicationController
   
     def index
       @tables = Table.order(:table_number)
+      @tables = Table.page(params[:page]).per(5)
+
     end
   
     def new

@@ -1,27 +1,128 @@
-<h1>New Reservation</h1>
+<button class="btn btn-primary" id="toggleButton" style="bottom: 20px; right: 20px; z-index: 1000;">
+Hide available time slot/table
+</button>
 
-<%= form_with(model: @reservation, local: true) do |form| %>
-  <div class="form-group">
-    <%= form.label :reservation_date %>
-    <%= form.date_field :reservation_date, class: 'form-control', min: @today %>
+<div class="row">
+  <!-- Available Time Slots -->
+  <div class="col-lg-6 mb-4" id="timeSlotsContainer">
+    <h3 class="text-primary">Available Time Slots Today</h3>
+    <ul class="list-group shadow-sm" id="timeSlotsList">
+      <% @time_slots.each do |time_slot| %>
+        <% 
+          reserved_count = time_slot.reservations.where(reservation_date: @today).count
+          availability = reserved_count < time_slot.max_reservations ? 'Available' : 'Unavailable'
+        %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <%= time_slot.formatted_slot_time %>
+          <span class="badge <%= availability == 'Available' ? 'bg-success' : 'bg-danger' %>">
+            <%= availability %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
   </div>
 
-  <div class="form-group">
-  <%= form.label :time_slot_id, "Select Time Slot" %>
-  <%= form.collection_select :time_slot_id, @time_slots, :id, :formatted_slot_time, 
-      prompt: "Select a time slot", class: 'form-control', required: true %>
+<!-- Available Tables -->
+<div class="col-lg-6 mb-4" id="tablesContainer">
+  <h3 class="text-primary">Available Tables</h3>
+  <ul class="list-group shadow-sm" id="tablesList">
+    <% @tables.each do |table| %>
+      <% 
+        reserved_count = table.reservations.where(reservation_date: @today).count
+        availability = if table.availability && reserved_count < table.max_capacity
+                        'Available'
+                      else
+                        'Unavailable'
+                      end
+      %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Table <%= table.table_number %> (Max: <%= table.max_capacity %> people)
+        <span class="badge <%= availability == 'Available' ? 'bg-success' : 'bg-danger' %>">
+          <%= availability %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 </div>
-  <div class="form-group">
-    <%= form.label :table_id, 'Table' %>
-    <%= form.collection_select :table_id, @tables, :id, :table_number, { prompt: 'Select a table' }, class: 'form-control' %>
-  </div>
 
-  <div class="form-group">
-    <%= form.label :number_of_people %>
-    <%= form.number_field :number_of_people, class: 'form-control' %>
-  </div>
 
-  <div class="form-group mt-3">
-    <%= form.submit 'Create Reservation', class: 'btn btn-primary' %>
+</div>
+
+
+<hr class="my-4">
+
+<!-- Reservation Form -->
+<div class="card shadow-sm">
+  <div class="card-body">
+    <h3 class="text-center text-primary mb-4">Create Your Reservation</h3>
+    <%= form_with(model: @reservation, local: true) do |form| %>
+      <div class="row">
+        <!-- Reservation Date -->
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <%= form.label :reservation_date, class: 'form-label' %>
+            <%= form.date_field :reservation_date, class: 'form-control', min: @today %>
+          </div>
+        </div>
+
+        <!-- Select Time Slot -->
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <%= form.label :time_slot_id, "Select Time Slot", class: 'form-label' %>
+            <%= form.collection_select :time_slot_id, @time_slots, :id, :formatted_slot_time, 
+                prompt: "Select a time slot", class: 'form-control', required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Select Table -->
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <%= form.label :table_id, 'Select Table', class: 'form-label' %>
+            <%= form.collection_select :table_id, @tables, :id, :table_number, 
+                { prompt: 'Select a table' }, class: 'form-control', required: true %>
+          </div>
+        </div>
+
+        <!-- Number of People -->
+        <div class="col-md-6 mb-3">
+          <div class="form-group">
+            <%= form.label :number_of_people, class: 'form-label' %>
+            <%= form.number_field :number_of_people, class: 'form-control', min: 1, max: 20 %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center mt-4">
+        <%= form.submit 'Create Reservation', class: 'btn btn-primary px-5 py-2' %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
+
+
+
+<script> 
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.getElementById("toggleButton");
+  const timeSlotsContainer = document.getElementById("timeSlotsContainer");
+  const tablesContainer = document.getElementById("tablesContainer");
+
+  toggleButton.addEventListener("click", () => {
+    const isHidden = timeSlotsContainer.style.display === "none" && tablesContainer.style.display === "none";
+
+    if (isHidden) {
+      timeSlotsContainer.style.display = "block";
+      tablesContainer.style.display = "block";
+      toggleButton.textContent = "Hide";
+    } else {
+      timeSlotsContainer.style.display = "none";
+      tablesContainer.style.display = "none";
+      toggleButton.textContent = "Show available time and tables";
+    }
+  });
+});
+
+</script>

@@ -5,17 +5,17 @@ class ReservationsController < ApplicationController
   def index
     # Only show the logged-in user's reservations
     @reservations = current_user.reservations.includes(:user, :time_slot, :table)
+    @reservations = current_user.reservations.page(params[:page]).per(4) # You can change the per page value as needed
   end
-  
+
   def new
     @reservation = Reservation.new
     @time_slots = TimeSlot.all # You may want to order this by time if needed
     @tables = Table.all
     @today = Date.today # Store today's date to pass to the form
+  
     load_tables_and_time_slots
   end
-
-
 
   def create
     @reservation = current_user.reservations.build(reservation_params)
@@ -27,8 +27,24 @@ class ReservationsController < ApplicationController
     # Clear previous messages
     flash.clear
   
+    # Check if the time slot or table is invalid
     if time_slot.nil? || table.nil?
       flash.now[:danger] = "Invalid time slot or table selected."
+      load_tables_and_time_slots
+      render 'new' and return
+    end
+  
+    # Check if the table is available
+    if !table.availability
+      flash.now[:warning] = "Table #{table.table_number} is currently unavailable."
+      load_tables_and_time_slots
+      render 'new' and return
+    end
+  
+    # Check if the table has reached its max reservation limit for the selected date
+    reserved_count = table.reservations.where(reservation_date: @reservation.reservation_date).count
+    if reserved_count >= table.max_capacity
+      flash.now[:warning] = "Table #{table.table_number} is fully booked for the selected date."
       load_tables_and_time_slots
       render 'new' and return
     end
@@ -60,7 +76,7 @@ class ReservationsController < ApplicationController
     end
   end
   
-  
+
   def show
   end
 
@@ -79,8 +95,7 @@ class ReservationsController < ApplicationController
       redirect_to reservations_path
     end
   end
-  
-  
+
   def destroy
     @reservation.destroy
     flash[:success] = "Reservation canceled."
@@ -96,9 +111,11 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:reservation_date, :time_slot_id, :table_id, :number_of_people)
   end
-  
+
   def load_tables_and_time_slots
     @tables = Table.all
-    @time_slots = TimeSlot.all
+    @time_slots = TimeSlot.includes(:reservations).all
   end
-end
+  
+  end
+

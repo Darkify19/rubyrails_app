@@ -17,7 +17,7 @@
 html, body {
    height: 100%; /* Ensure full height */
    margin: 0;    /* Remove default margin */
-   padding-top: 60px; /* Adjusted padding for header space */
+   padding-top: 35px; /* Adjusted padding for header space */
    display: flex;
    flex-direction: column; /* Stack content vertically */
 }
@@ -60,12 +60,11 @@ footer {
    bottom: 0;
    left: 0;
    width: 100%;
-   padding: 10px 0;
+   padding: 4px 0;
    border-top: 1px solid #eaeaea;
    color: #777;
    background-color: #fff;
-   z-index: 1000; /* Ensure it stays on top */
-}
+   }
 
 footer a {
    color: #555;
@@ -185,3 +184,16 @@ input {
    padding: 10px 0;
    border-bottom: 1px solid #eaeaea;
 }
+.table th, .table td {
+   vertical-align: middle;  /* Center content vertically */
+ }
+ 
+ .pagination-top, .pagination-bottom {
+   margin-top: 1px; /* Add some space between the table and pagination */
+   position: fixed;
+}
+ 
+ .pagination {
+   justify-content: flex-end; /* Align pagination to the right */
+ }
+ 

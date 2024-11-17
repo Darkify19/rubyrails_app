@@ -2,6 +2,11 @@
 
 <%= link_to 'Create New Time Slot', new_admin_time_slot_path, class: 'btn btn-primary' %>
 
+<!-- Pagination at the top -->
+<div class="pagination-top mb-3 text-end">
+  <%= paginate @time_slots %>
+</div>
+
 <table class="table mt-4">
   <thead>
     <tr>
@@ -17,7 +22,7 @@
         <td><%= time_slot.max_reservations %></td>
         <td>
           <%= link_to 'Edit', edit_admin_time_slot_path(time_slot), class: 'btn btn-warning' %>
-          
+
           <!-- Delete Form -->
           <%= form_with(url: admin_time_slot_path(time_slot), method: :delete, data: { confirm: 'Are you sure you want to delete this time slot?' }, local: true) do |form| %>
             <%= form.submit 'Delete', class: 'btn btn-danger' %>
@@ -27,3 +32,8 @@
     <% end %>
   </tbody>
 </table>
+
+<!-- Pagination at the bottom -->
+<div class="pagination-bottom mt-3 text-end">
+  <%= paginate @time_slots %>
+</div>
