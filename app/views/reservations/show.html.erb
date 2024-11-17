@@ -1,9 +1,17 @@
 <h1>Reservation Confirmation</h1>
 
 <p><strong>Reservation Date:</strong> <%= @reservation.reservation_date %></p>
-<p><strong>Time Slot:</strong> <%= @reservation.time_slot %></p>
+<p><strong>Time Slot:</strong> <%= @reservation.time_slot.formatted_slot_time %></p> <!-- Use formatted_slot_time to display in AM/PM format -->
 <p><strong>Table Number:</strong> <%= @reservation.table.table_number %></p>
 <p><strong>Number of People:</strong> <%= @reservation.number_of_people %></p>
 <p><strong>Status:</strong> <%= @reservation.status %></p>
 
-<%= link_to 'Back to Reservations', reservations_path, class: 'btn btn-secondary' %>
+<!-- Display Admin's Message if present -->
+<% if @reservation.message.present? %>
+  <div class="alert alert-info mt-3">
+    <strong>Admin's Message:</strong>
+    <p><%= @reservation.message %></p>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Reservations', reservations_path, class: 'btn btn-secondary mt-3' %>

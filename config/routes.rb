@@ -18,9 +18,8 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'admin#dashboard'
     get 'manage_time_slots', to: 'admin#time_slots', as: :manage_time_slots
     get 'manage_reservations', to: 'admin#manage_reservations'
-
     resources :time_slots
-    resources :reservations, only: [:index, :show, :update]
+    resources :reservations, only: [:index, :show, :edit, :destroy, :update]
     resources :tables, only: [:index, :create, :update, :destroy, :new, :edit, :show]  do
       member do
         put :toggle_availability  # This will respond to PUT requests for /admin/tables/:id/toggle_availability

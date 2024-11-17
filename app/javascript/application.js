@@ -1,7 +1,10 @@
-import "bootstrap"; // Import Bootstrap
-import { Turbo } from "@hotwired/turbo-rails"; // Import Turbo (for TurboLinks replacement)
-import "@rails/ujs";  // Import Rails UJS
-import "controllers";  // Import Stimulus controllers
-import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
+import "bootstrap"  // Import Bootstrap JS
+import { Turbo } from "turbo"  // Import Turbo
+import Rails from "@rails/ujs"  // Import Rails UJS
+import "controllers"  // Import Stimulus controllers
 
-Rails.start(); // Initialize Rails UJS
+// Initialize Rails UJS
+Rails.start()
+
+// Initialize Turbo
+Turbo.start()

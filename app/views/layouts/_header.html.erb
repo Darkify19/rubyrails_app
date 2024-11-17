@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<header class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
   <div class="container">
     <!-- Logo link -->
     <%= link_to "Restaurant Reservations", root_path, id: "logo", class: "navbar-brand" %>
@@ -13,47 +13,47 @@
       <nav class="ms-auto">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <%= link_to "Home", root_path, class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link text-white" %>
           </li>
 
           <% if logged_in? %>
             <!-- Reservation related links (only for non-admin users) -->
             <% unless current_user.admin? %>
               <li class="nav-item">
-                <%= link_to "My Reservations", reservations_path, class: "nav-link" %>
+                <%= link_to "My Reservations", reservations_path, class: "nav-link text-white" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Make a Reservation", new_reservation_path, class: "nav-link" %>
+                <%= link_to "Make a Reservation", new_reservation_path, class: "nav-link text-white" %>
               </li>
             <% end %>
 
             <!-- Admin-only links -->
             <% if current_user.admin? %>
               <li class="nav-item">
-                <%= link_to "Table Management", admin_tables_path, class: "nav-link" %>
+                <%= link_to "Table Management", admin_tables_path, class: "nav-link text-white" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Time Slots", admin_time_slots_path, class: "nav-link" %>
+                <%= link_to "Time Slots", admin_time_slots_path, class: "nav-link text-white" %>
               </li>
               <li class="nav-item">
-                <%= link_to "Admin Reservations", admin_reservations_path, class: "nav-link" %>
+                <%= link_to "Admin Reservations", admin_reservations_path, class: "nav-link text-white" %>
               </li>
             <% end %>
 
             <!-- User profile and logout -->
             <li class="nav-item">
-              <%= link_to "Profile", current_user, class: "nav-link" %>
+              <%= link_to "Profile", current_user, class: "nav-link text-white" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Settings", edit_user_path(current_user), class: "nav-link" %>
+              <%= link_to "Settings", edit_user_path(current_user), class: "nav-link text-white" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Log out", logout_path, method: :delete, class: "nav-link" %>
+              <%= link_to "Log out", logout_path, method: :delete, class: "nav-link text-white" %>
             </li>
           <% else %>
             <!-- Login link -->
             <li class="nav-item">
-              <%= link_to "Log in", login_path, class: "nav-link" %>
+              <%= link_to "Log in", login_path, class: "nav-link text-white" %>
             </li>
           <% end %>
         </ul>

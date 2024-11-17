@@ -14,13 +14,22 @@
     </thead>
     <tbody>
       <% @reservations.each do |reservation| %>
-        <tr>
+        <!-- Apply Bootstrap classes based on reservation status -->
+        <tr class="<%= 'table-success' if reservation.status == 'confirmed' %>
+                   <%= 'table-danger' if reservation.status == 'cancelled' %>
+                   <%= 'table-warning' if reservation.status == 'pending' %>
+                   <%= 'font-weight-bold' if reservation.message.present? %>">
           <td><%= reservation.reservation_date %></td>
-          <td><%= reservation.time_slot %></td>
+          <td><%= reservation.time_slot&.formatted_slot_time || 'N/A' %></td>
           <td><%= reservation.table.table_number %></td>
           <td><%= reservation.number_of_people %></td>
           <td><%= reservation.status %></td>
-          <td><%= link_to 'Cancel', reservation_path(reservation), method: :delete, class: 'btn btn-danger' %></td>
+          <td>
+            <%= link_to 'View', reservation_path(reservation), class: 'btn btn-info' %>
+            <%= form_with(model: reservation, method: :delete, local: true) do |form| %>
+              <%= form.submit 'Cancel', class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -28,4 +37,5 @@
 <% else %>
   <p>No reservations yet.</p>
 <% end %>
+
 <%= link_to 'Make a Reservation', new_reservation_path, class: 'btn btn-primary' %>

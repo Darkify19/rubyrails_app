@@ -1,15 +1,19 @@
-<!-- app/views/admin/time_slots/edit.html.erb -->
 <h1>Edit Time Slot</h1>
 
 <%= form_with(model: @time_slot, url: admin_time_slot_path(@time_slot), method: :put, local: true) do |form| %>
   <div class="form-group">
-    <%= form.label :slot_time %>
-    <%= form.text_field :slot_time, class: 'form-control' %>
+    <%= form.label :slot_time, 'Time Slot (HH:MM AM/PM)' %>
+    <%= form.text_field :slot_time, value: @time_slot.slot_time.strftime('%I:%M %p'), class: 'form-control' %>
   </div>
+
   <div class="form-group">
-    <%= form.label :max_reservations %>
-    <%= form.number_field :max_reservations, class: 'form-control' %>
+    <%= form.label :max_reservations, 'Maximum Reservations' %>
+    <%= form.number_field :max_reservations, class: 'form-control', min: 1, step: 1 %>
   </div>
-  <%= form.submit 'Update Time Slot', class: 'btn btn-warning' %>
+
+  <div class="form-group mt-3">
+    <%= form.submit 'Update Time Slot', class: 'btn btn-warning' %>
+  </div>
 <% end %>
-<%= link_to 'Back', admin_time_slots_path, class: 'btn btn-secondary' %>
+
+<%= link_to 'Back', admin_time_slots_path, class: 'btn btn-secondary mt-3' %>

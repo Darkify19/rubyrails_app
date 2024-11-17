@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_16_130213) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_17_071248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -27,10 +27,11 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_130213) do
     t.date "reservation_date"
     t.string "time_slot"
     t.integer "number_of_people"
-    t.string "status"
+    t.string "status", default: "pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "time_slot_id"
+    t.text "message"
     t.index ["table_id"], name: "index_reservations_on_table_id"
     t.index ["time_slot_id"], name: "index_reservations_on_time_slot_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
@@ -46,7 +47,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_16_130213) do
   end
 
   create_table "time_slots", force: :cascade do |t|
-    t.string "slot_time"
+    t.time "slot_time"
     t.integer "max_reservations"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
