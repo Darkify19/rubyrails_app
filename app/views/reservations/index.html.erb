@@ -1,0 +1,31 @@
+<h1>Your Reservations</h1>
+
+<% if @reservations.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Reservation Date</th>
+        <th>Time Slot</th>
+        <th>Table Number</th>
+        <th>People</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.reservation_date %></td>
+          <td><%= reservation.time_slot %></td>
+          <td><%= reservation.table.table_number %></td>
+          <td><%= reservation.number_of_people %></td>
+          <td><%= reservation.status %></td>
+          <td><%= link_to 'Cancel', reservation_path(reservation), method: :delete, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No reservations yet.</p>
+<% end %>
+<%= link_to 'Make a Reservation', new_reservation_path, class: 'btn btn-primary' %>

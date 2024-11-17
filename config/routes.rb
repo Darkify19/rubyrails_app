@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+  
   get "static_pages/home"
   get "static_pages/help"
   get "static_pages/about"
@@ -6,21 +8,25 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   get '/login', to: 'sessions#new'
   post '/login',  to: 'sessions#create'
-
+  
   get '/logout', to: 'sessions#destroy'
-
+  get 'admin/dashboard', to: 'admin#dashboard'
   resources :users
+  resources :reservations, only: [:index, :new, :create, :show, :destroy]
+  
+  namespace :admin do
+    get 'dashboard', to: 'admin#dashboard'
+    get 'manage_time_slots', to: 'admin#time_slots', as: :manage_time_slots
+    get 'manage_reservations', to: 'admin#manage_reservations'
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+    resources :time_slots
+    resources :reservations, only: [:index, :show, :update]
+    resources :tables, only: [:index, :create, :update, :destroy, :new, :edit, :show]  do
+      member do
+        put :toggle_availability  # This will respond to PUT requests for /admin/tables/:id/toggle_availability
+      end
+    end
+  end  
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
   root 'static_pages#home'
 end

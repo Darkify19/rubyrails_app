@@ -1,0 +1,7 @@
+<h1>Manage Time Slots</h1>
+
+<% @time_slots.each do |slot| %>
+  <p><%= slot.slot_time %> - <%= slot.max_reservations %> reservations allowed</p>
+<% end %>
+
+<%= link_to 'Add New Slot', new_time_slot_path, class: 'btn btn-primary' %>

@@ -1,0 +1,20 @@
+<!-- app/views/admin/tables/new.html.erb -->
+<h1>Create New Table</h1>
+
+<%= form_with(model: @table, url: admin_tables_path, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :table_number %>
+    <%= form.number_field :table_number, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :max_capacity %>
+    <%= form.number_field :max_capacity, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :availability %>
+    <%= form.check_box :availability %> Available
+  </div>
+  <%= form.submit 'Create Table', class: 'btn btn-primary' %>
+<% end %>
+
+<%= link_to 'Back', admin_tables_path, class: 'btn btn-secondary' %>

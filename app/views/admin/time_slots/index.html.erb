@@ -1,0 +1,28 @@
+<!-- app/views/admin/time_slots/index.html.erb -->
+<h1>Manage Time Slots</h1>
+
+<%= link_to 'Create New Time Slot', new_admin_time_slot_path, class: 'btn btn-primary' %>
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th>Time Slot</th>
+      <th>Max Reservations</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @time_slots.each do |time_slot| %>
+      <tr>
+        <td><%= time_slot.slot_time %></td>
+        <td><%= time_slot.max_reservations %></td>
+        <td>
+          <%= link_to 'Edit', edit_admin_time_slot_path(time_slot), class: 'btn btn-warning' %>
+<%= form_with(url: admin_time_slot_path(time_slot), method: :delete, data: { confirm: 'Are you sure?' }, local: true) do |form| %>
+  <%= form.submit "Delete", class: "btn btn-danger" %>
+<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  table: one
+  reservation_date: 2024-11-16
+  time_slot: MyString
+  number_of_people: 1
+  status: MyString
+
+two:
+  user: two
+  table: two
+  reservation_date: 2024-11-16
+  time_slot: MyString
+  number_of_people: 1
+  status: MyString

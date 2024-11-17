@@ -1,0 +1,14 @@
+<h1>Create New Time Slot</h1>
+
+<%= form_with(model: @time_slot, url: admin_time_slots_path, local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :slot_time %>
+    <%= form.select :slot_time, options_for_select((0..23).map { |h| [Time.parse("#{h}:00").strftime('%I:00 %p'), Time.parse("#{h}:00").strftime('%H:%M')] }), prompt: "Select a time", class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= form.label :max_reservations %>
+    <%= form.number_field :max_reservations, class: 'form-control', min: 1 %>
+  </div>
+  <%= form.submit 'Create Time Slot', class: 'btn btn-primary' %>
+<% end %>
+<%= link_to 'Back', admin_time_slots_path, class: 'btn btn-secondary' %>

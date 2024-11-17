@@ -1,0 +1,39 @@
+<h1>Manage Tables</h1>
+
+<%= link_to 'Create New Table', new_admin_table_path, class: 'btn btn-primary' %>
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th>Table Number</th>
+      <th>Max Capacity</th>
+      <th>Availability</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tables.each do |table| %>
+      <tr>
+        <td><%= table.table_number %></td>
+        <td><%= table.max_capacity %></td>
+        <td>
+          <!-- Toggle Availability Button -->
+          <%= form_with(url: toggle_availability_admin_table_path(table), method: :put, data: { confirm: 'Are you sure you want to toggle the availability?' }, local: true) do |form| %>
+            <%= form.submit table.availability ? 'Available' : 'Unavailable', class: "btn btn-sm #{table.availability ? 'btn-success' : 'btn-info'}" %>
+          <% end %>
+        </td>
+        <td>
+          <!-- Edit Button with Icon -->
+          <%= link_to edit_admin_table_path(table), class: 'btn btn-warning btn-sm' do %>
+            <i class="fas fa-edit"></i>  <!-- Edit Icon -->
+          <% end %>
+
+          <!-- Delete Button with Icon -->
+          <%= form_with(url: admin_table_path(table), method: :delete, data: { confirm: 'Are you sure?' }, local: true) do |form| %>
+            <%= form.submit 'X'.html_safe, class: 'btn btn-danger btn-sm' %>  <!-- Trash Icon -->
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

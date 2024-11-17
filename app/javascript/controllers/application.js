@@ -1,9 +1,8 @@
-import { Application } from "@hotwired/stimulus"
+// app/javascript/controllers/example_controller.js
+import { Controller } from "stimulus";
 
-const application = Application.start()
-
-// Configure Stimulus development experience
-application.debug = false
-window.Stimulus   = application
-
-export { application }
+export default class extends Controller {
+  connect() {
+    console.log("Example controller is connected!");
+  }
+}

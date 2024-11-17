@@ -1,0 +1,10 @@
+<h1>Admin Dashboard</h1>
+
+<h2>Reservations</h2>
+<%= render 'reservations_table' %>
+
+<h2>Time Slots</h2>
+<%= link_to 'Manage Time Slots', manage_time_slots_admin_path, class: 'btn btn-secondary' %>
+
+<h2>Manage Reservations</h2>
+<%= link_to 'Manage Reservations', manage_reservations_admin_path, class: 'btn btn-secondary' %>

@@ -1,0 +1,9 @@
+<h1>Reservation Confirmation</h1>
+
+<p><strong>Reservation Date:</strong> <%= @reservation.reservation_date %></p>
+<p><strong>Time Slot:</strong> <%= @reservation.time_slot %></p>
+<p><strong>Table Number:</strong> <%= @reservation.table.table_number %></p>
+<p><strong>Number of People:</strong> <%= @reservation.number_of_people %></p>
+<p><strong>Status:</strong> <%= @reservation.status %></p>
+
+<%= link_to 'Back to Reservations', reservations_path, class: 'btn btn-secondary' %>

@@ -1,0 +1,30 @@
+<!-- app/views/admin/reservations/index.html.erb -->
+<h1>Manage Reservations</h1>
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Reservation Date</th>
+      <th>Time Slot</th>
+      <th>Number of People</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr>
+        <td><%= reservation.user.name %></td>
+        <td><%= reservation.reservation_date %></td>
+        <td><%= reservation.time_slot %></td>
+        <td><%= reservation.number_of_people %></td>
+        <td><%= reservation.status %></td>
+        <td>
+          <%= link_to 'View', admin_reservation_path(reservation), class: 'btn btn-info' %>
+          <%= link_to 'Cancel', admin_reservation_path(reservation), method: :put, params: { status: 'cancelled' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
