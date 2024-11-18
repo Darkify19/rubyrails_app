@@ -9,30 +9,43 @@
   <%= paginate @tables %>
 </div>
 
+<!-- Reminder Text -->
+<div class="alert alert-info mt-3" role="alert">
+  <strong>Reminder:</strong> Click on the table blocks below to edit them.
+</div>
+
 <div class="tables-container mt-4">
   <% @tables.each do |table| %>
-    <div class="table-block mb-3">
-      <div class="table-info">
-        <h4>Table <%= table.table_number %></h4>
-        <p><strong>Max Capacity:</strong> <%= table.max_capacity %></p>
-        <p><strong>Status:</strong> 
-          <%= table.availability ? 'Available' : 'Unavailable' %>
-        </p>
+    <div class="table-block mb-3 position-relative p-3 border rounded bg-light shadow-sm d-flex flex-column">
+      <!-- Delete button at the top-right -->
+      <div class="delete-btn position-absolute top-0 end-0 m-2">
+        <%= form_with(url: admin_table_path(table), method: :delete, data: { confirm: 'Are you sure you want to delete this table?' }, local: true) do |form| %>
+          <%= form.submit 'X', class: 'btn btn-danger btn-sm' %> 
+        <% end %>
       </div>
 
-      <div class="table-actions">
+      <!-- Clickable block that links to the 'Edit' page -->
+      <%= link_to edit_admin_table_path(table), class: 'text-decoration-none text-dark flex-grow-1' do %>
+        <div class="table-info">
+          <h4 class="mb-2">Table <%= table.table_number %></h4>
+          <p><strong>Max Capacity:</strong> <%= table.max_capacity %></p>
+          <p><strong>Status:</strong> 
+            <%= table.availability ? 'Available' : 'Unavailable' %>
+          </p>
+        </div>
+      <% end %>
+
+      <!-- Retain the Available/Unavailable Toggle Button -->
+      <div class="table-actions mt-2 d-flex justify-content-between align-items-center">
         <%= form_with(url: toggle_availability_admin_table_path(table), method: :put, data: { confirm: 'Are you sure you want to toggle the availability?' }, local: true) do |form| %>
           <%= form.submit table.availability ? 'Available' : 'Unavailable', class: "btn btn-sm #{table.availability ? 'btn-success' : ''}" %>
-        <% end %>
-
-        <%= link_to edit_admin_table_path(table), class: 'btn btn-warning btn-sm' do %>
-          <i class="fas fa-edit"></i> <!-- Edit Icon -->
-        <% end %>
-
-        <%= form_with(url: admin_table_path(table), method: :delete, data: { confirm: 'Are you sure?' }, local: true) do |form| %>
-          <%= form.submit 'X'.html_safe, class: 'btn btn-danger btn-sm' %> 
         <% end %>
       </div>
     </div>
   <% end %>
+</div>
+
+<!-- Pagination at the bottom -->
+<div class="pagination-bottom mt-3 text-end">
+  <%= paginate @tables %>
 </div>

@@ -17,6 +17,8 @@ class Admin::TablesController < ApplicationController
         flash[:success] = 'Table created successfully!'
         redirect_to admin_tables_path
       else
+        flash[:warning] = 'Please check your Table number and its max cap.'
+
         render :new
       end
     end

@@ -1,12 +1,12 @@
 <% provide(:title, 'Your Reservations') %>
 
 <h1>Your Reservations</h1>
-<!-- Pagination Links -->
-  <div class="d-flex justify-content-between">
-    <%= link_to 'Previous', reservations_path(page: @reservations.prev_page), class: 'btn btn-secondary' if @reservations.prev_page %>
-    <%= link_to 'Next', reservations_path(page: @reservations.next_page), class: 'btn btn-secondary' if @reservations.next_page %>
-  </div>
-  
+
+<!-- Pagination Links using Kaminari -->
+<div class="d-flex justify-content-between">
+  <%= paginate @reservations %>
+</div>
+
 <% if @reservations.any? %>
   <table class="table">
     <thead>
@@ -42,7 +42,6 @@
     </tbody>
   </table>
 
-  
 <% else %>
   <p>No reservations yet.</p>
 <% end %>

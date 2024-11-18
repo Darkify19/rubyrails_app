@@ -6,9 +6,22 @@ class UsersController < ApplicationController
       @users = User.all
       end
       
-  def show
-    @user = User.find(params[:id])
-  end
+      def show
+        @user = User.find(params[:id])
+      
+        # Admin view logic
+        if current_user.admin?
+          @current_month = Date.today.beginning_of_month
+          @end_of_month = @current_month.end_of_month
+      
+          # Get reservations for the current month
+          @reservations = Reservation.where(reservation_date: @current_month..@end_of_month)
+          
+          # Get all time slots
+          @time_slots = TimeSlot.all
+        end
+      end
+      
 
   def new
     @user = User.new
