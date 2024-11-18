@@ -4,7 +4,7 @@ class Admin::TimeSlotsController < ApplicationController
   
     def index
       @time_slots = TimeSlot.all
-      @time_slots = TimeSlot.page(params[:page]).per(3)  # Show 5 time slots per page
+      @time_slots = TimeSlot.page(params[:page]).per(6)  # Show 5 time slots per page
 
     end
   

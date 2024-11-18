@@ -196,4 +196,53 @@ input {
  .pagination {
    justify-content: flex-end; /* Align pagination to the right */
  }
+ /* In your app/assets/stylesheets/application.css or a custom stylesheet */
+.tables-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 20px;
+   justify-content: flex-start;
+ }
+ 
+ .table-block {
+   width: calc(33% - 20px); /* Adjust the percentage to control the number of blocks per row */
+   padding: 4px;
+   background-color: #f9f9f9;
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+   transition: transform 0.3s ease-in-out;
+ }
+ 
+ .table-block:hover {
+   transform: scale(1.05);
+ }
+ 
+ .table-info h4 {
+   margin-bottom: 10px;
+   font-size: 1.25rem;
+   font-weight: bold;
+ }
+ 
+ .table-actions {
+   margin-top: 15px;
+   display: flex;
+   gap: 10px;
+ }
+ 
+ .table-actions .btn {
+   padding: 5px 10px;
+ }
+ 
+ .table-info p {
+   margin-bottom: 5px;
+ }
+ #calendar {
+   max-width: 900px;
+   margin: 40px auto;
+   padding: 10px;
+   background: white;
+   border-radius: 8px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
  

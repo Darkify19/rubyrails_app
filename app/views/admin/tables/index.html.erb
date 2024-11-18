@@ -7,36 +7,30 @@
   <%= paginate @tables %>
 </div>
 
-<table class="table mt-4">
-  <thead>
-    <tr>
-      <th>Table Number</th>
-      <th>Max Capacity</th>
-      <th>Availability</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tables.each do |table| %>
-      <tr>
-        <td><%= table.table_number %></td>
-        <td><%= table.max_capacity %></td>
-        <td>
-          <%= form_with(url: toggle_availability_admin_table_path(table), method: :put, data: { confirm: 'Are you sure you want to toggle the availability?' }, local: true) do |form| %>
-            <%= form.submit table.availability ? 'Available' : 'Unavailable', class: "btn btn-sm #{table.availability ? 'btn-success' : ''}" %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to edit_admin_table_path(table), class: 'btn btn-warning btn-sm' do %>
-            <i class="fas fa-edit"></i>  <!-- Edit Icon -->
-          <% end %>
+<div class="tables-container mt-4">
+  <% @tables.each do |table| %>
+    <div class="table-block mb-3">
+      <div class="table-info">
+        <h4>Table <%= table.table_number %></h4>
+        <p><strong>Max Capacity:</strong> <%= table.max_capacity %></p>
+        <p><strong>Status:</strong> 
+          <%= table.availability ? 'Available' : 'Unavailable' %>
+        </p>
+      </div>
 
-          <%= form_with(url: admin_table_path(table), method: :delete, data: { confirm: 'Are you sure?' }, local: true) do |form| %>
-            <%= form.submit 'X'.html_safe, class: 'btn btn-danger btn-sm' %> 
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="table-actions">
+        <%= form_with(url: toggle_availability_admin_table_path(table), method: :put, data: { confirm: 'Are you sure you want to toggle the availability?' }, local: true) do |form| %>
+          <%= form.submit table.availability ? 'Available' : 'Unavailable', class: "btn btn-sm #{table.availability ? 'btn-success' : ''}" %>
+        <% end %>
 
+        <%= link_to edit_admin_table_path(table), class: 'btn btn-warning btn-sm' do %>
+          <i class="fas fa-edit"></i> <!-- Edit Icon -->
+        <% end %>
+
+        <%= form_with(url: admin_table_path(table), method: :delete, data: { confirm: 'Are you sure?' }, local: true) do |form| %>
+          <%= form.submit 'X'.html_safe, class: 'btn btn-danger btn-sm' %> 
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

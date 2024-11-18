@@ -2,8 +2,8 @@ class Admin::TablesController < ApplicationController
     before_action :require_admin
   
     def index
-      @tables = Table.order(:table_number)
-      @tables = Table.page(params[:page]).per(5)
+      @tables = Table.order(:table_number).page(params[:page]) # Add pagination here if needed
+            @tables = Table.page(params[:page]).per(6)
 
     end
   
@@ -31,6 +31,7 @@ class Admin::TablesController < ApplicationController
         flash[:success] = 'Table updated successfully!'
         redirect_to admin_tables_path
       else
+        flash[:warning] = 'There is an existing table already.'
         render :edit
       end
     end
