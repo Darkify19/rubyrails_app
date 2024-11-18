@@ -3,6 +3,8 @@ class Admin::ReservationsController < ApplicationController
 
   def index
     @reservations = Reservation.all
+    @reservations = Reservation.order(reservation_date: :desc).page(params[:page]).per(4)
+
   end
 
   def edit

@@ -1,6 +1,10 @@
 <% provide(:title, 'Manage Reservations') %>
 
 <h1>Manage Reservations</h1>
+<div class="pagination">
+  <%= paginate @reservations %>
+</div>
+
 
 <table class="table mt-4">
   <thead>
