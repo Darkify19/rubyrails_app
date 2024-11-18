@@ -1,3 +1,5 @@
+<% provide(:title, 'Edit Reservation') %>
+
 <h1>Edit Reservation</h1>
 
 <%= form_with(model: @reservation, url: admin_reservation_path(@reservation), method: :put, local: true) do |form| %>

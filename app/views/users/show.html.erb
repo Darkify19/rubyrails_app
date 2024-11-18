@@ -50,26 +50,10 @@
             <p>No reservations yet.</p>
           <% end %>
         <% else %>
-   <div id="calendar"></div>
 
+        
         <% end %>
       </section>
     </div>
   </div>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const calendarEl = document.getElementById('calendar');
-
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'timeGridWeek',
-      events: '/admin/reservations/calendar', // Fetch reservation data from Rails endpoint
-      eventColor: '#007bff',
-      eventClick: function(info) {
-        alert(`Reservation ID: ${info.event.id}`);
-      }
-    });
-
-    calendar.render();
-  });
-</script>
