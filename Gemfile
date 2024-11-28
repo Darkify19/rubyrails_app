@@ -6,6 +6,11 @@ gem "rails", "~> 8.0.0"
 gem 'bcrypt', '3.1.13'
 gem 'faker', '2.1.2'
 gem 'kaminari'
+# GraphQL Gem
+gem "graphql", "~> 2.0"
+
+# GraphiQL for development
+gem "graphiql-rails", group: :development
 
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
