@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "rails", "~> 8.0.0"
 gem 'bcrypt', '3.1.13'
-gem 'faker', '2.1.2'
+gem 'faker', '3.5.1'
 gem 'kaminari'
 # GraphQL Gem
 gem "graphql", "~> 2.0"
