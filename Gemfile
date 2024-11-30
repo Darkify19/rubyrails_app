@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 
 gem "rails", "~> 8.0.0"
-gem 'bcrypt', '3.1.13'
+gem 'bcrypt', '3.1.20'
 gem 'faker', '3.5.1'
 gem 'kaminari'
 # GraphQL Gem
