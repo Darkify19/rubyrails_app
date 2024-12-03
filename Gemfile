@@ -7,7 +7,7 @@ gem 'bcrypt', '3.1.13'
 gem 'faker', '3.5.1'
 gem 'kaminari'
 # GraphQL Gem
-gem "graphql", "~> 2.0"
+gem "graphql", "~> 2.4"
 
 # GraphiQL for development
 gem "graphiql-rails", group: :development
