@@ -2,12 +2,12 @@ source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 
-gem "rails", "~> 8.0.0"
+gem "rails", "~> 8.0.2"
 gem 'bcrypt', '3.1.13'
 gem 'faker', '3.5.1'
 gem 'kaminari'
 # GraphQL Gem
-gem "graphql", "~> 2.4"
+gem "graphql", "~> 2.5"
 
 # GraphiQL for development
 gem "graphiql-rails", group: :development
